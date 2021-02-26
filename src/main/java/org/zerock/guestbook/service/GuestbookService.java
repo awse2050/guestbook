@@ -8,7 +8,12 @@ import org.zerock.guestbook.entity.Guestbook;
 public interface GuestbookService {
     // 추가
     Long register(GuestbookDTO dto);
-
+    // 읽기
+    public GuestbookDTO read(Long gno);
+    //삭제
+    public void remove(Long gno);
+    //수정
+    public void modify(GuestbookDTO dto);
     // 목록처리
     PageResultDTO<GuestbookDTO, Guestbook> getList(PageRequestDTO requestDTO);
 
@@ -29,6 +34,8 @@ public interface GuestbookService {
                 .title(entity.getTitle())
                 .content(entity.getContent())
                 .writer(entity.getWriter())
+                .regDate(entity.getRegDate())
+                .modDate(entity.getModDate())
                 .build();
 
         return dto;

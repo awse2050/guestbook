@@ -35,10 +35,42 @@ public class GuestbookServiceTests {
 
         PageResultDTO<GuestbookDTO, Guestbook> resultDTO = service.getList(pageRequestDTO);
 
-        log.info("Test ResultDTO : " + resultDTO);
+        System.out.println("prev : " +resultDTO.isPrev());
+        System.out.println("next : " + resultDTO.isNext());
+        System.out.println("total : " + resultDTO.getTotalPage());
+
+        System.out.println("-------------------------------------------");
 
         for (GuestbookDTO dto : resultDTO.getDtoList()) {
             System.out.println(dto);
         }
+
+        System.out.println("-=----------------------------------------");
+        resultDTO.getPageList().forEach(i -> System.out.println(i));
+    }
+
+    @Test
+    public void testSearch() {
+        PageRequestDTO requestDTO = PageRequestDTO.builder()
+                .page(1)
+                .size(10)
+                .type("tc")
+                .keyword("한글")
+                .build();
+
+        PageResultDTO<GuestbookDTO, Guestbook> resultDTO = service.getList(requestDTO);
+
+        System.out.println("prev : " + resultDTO.isPrev());
+        System.out.println("next: " +resultDTO.isNext());
+        System.out.println("total : " +resultDTO.getTotalPage());
+
+        System.out.println("===================================");
+        for (GuestbookDTO dto : resultDTO.getDtoList()) {
+            System.out.println(dto);
+        }
+
+        System.out.println("==============================");
+        resultDTO.getPageList().forEach(i -> System.out.println(i));
+
     }
 }
